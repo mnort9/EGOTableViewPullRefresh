@@ -58,7 +58,8 @@ typedef enum{
      arrowImageName:(NSString *)arrow
           textColor:(UIColor *)textColor
         shadowColor:(UIColor *)shadowColor
-    backgroundColor:(UIColor *)backgroundColor;
+    backgroundColor:(UIColor *)backgroundColor
+backgroundImageName:(NSString *)backgroundImageName;
 
 - (void)refreshLastUpdatedDate;
 - (void)egoRefreshScrollViewDidScroll:(UIScrollView *)scrollView;

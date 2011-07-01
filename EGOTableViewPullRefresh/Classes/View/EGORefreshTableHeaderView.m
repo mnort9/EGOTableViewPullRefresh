@@ -42,7 +42,8 @@
      arrowImageName:(NSString *)arrow
           textColor:(UIColor *)textColor
         shadowColor:(UIColor *)shadowColor
-    backgroundColor:(UIColor *)backgroundColor {
+    backgroundColor:(UIColor *)backgroundColor
+backgroundImageName:(NSString *)backgroundImageName {
   if((self = [super initWithFrame:frame])) {
 		self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		self.backgroundColor = backgroundColor;
@@ -79,6 +80,18 @@
 		layer.frame = CGRectMake(25.0f, frame.size.height - 65.0f, 30.0f, 55.0f);
 		layer.contentsGravity = kCAGravityResizeAspect;
 		layer.contents = (id)[UIImage imageNamed:arrow].CGImage;
+
+    if(backgroundImageName != nil) {
+      UIImage *backgroundImage = [UIImage imageNamed:backgroundImageName];
+      UIImageView *backgroundImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0,
+        frame.size.height - backgroundImage.size.height,
+        backgroundImage.size.width, backgroundImage.size.height)]
+        autorelease];
+      backgroundImageView.image = backgroundImage;
+      [self addSubview:backgroundImageView];
+      [self sendSubviewToBack:backgroundImageView];
+    }
+
 		
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 40000
 		if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
@@ -97,7 +110,7 @@
 		
 		
 		[self setState:EGOOPullRefreshNormal];
-		
+
     }
 	
     return self;
@@ -109,7 +122,8 @@
               arrowImageName:[EGORefreshTableHeaderView defaultArrowImageName]
                    textColor:[EGORefreshTableHeaderView defaultTextColor]
                  shadowColor:[EGORefreshTableHeaderView defaultShadowColor]
-             backgroundColor:[EGORefreshTableHeaderView defaultBackgroundColor]];
+             backgroundColor:[EGORefreshTableHeaderView defaultBackgroundColor]
+         backgroundImageName:nil];
 }
 
 #pragma mark - Getters
